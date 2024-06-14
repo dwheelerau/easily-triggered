@@ -1,0 +1,3 @@
+[submodule "camera-trap-tools"]
+	path = camera-trap-tools
+	url = https://github.com/dwheelerau/camera-trap-tools.git

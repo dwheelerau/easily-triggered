@@ -13,5 +13,12 @@ yolo predict model=/build/weights/yolov10l.pt source=cattle/ conf=0.25 save_txt=
 ```
 See 202406pfleming for more commands.  
 
+## Workflow for testing
+1. start container dog-go-moo
+2. run MD ie `python -m megadetector.detection.run_detector_batch 'MDV5A' /project/ project.json --recursive --threshold 0.3`
+3. Run xxxx to process json to csv
+4. xxx
+
+
 ## ToDo  
 Modify the docker file to include a repo of scripts for processing the outputs from the models.  
