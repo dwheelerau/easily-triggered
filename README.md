@@ -17,9 +17,10 @@ See 202406pfleming for more commands.
 1. start container dog-go-moo
 2. run MD  
 `python -m megadetector.detection.run_detector_batch 'MDV5A' /project/ project.json --recursive --threshold 0.3`  
-3. Run `json_to_csv.py` to get a human friendly output.  
-`python ../camera-trap-tools/scripts/json_to_csv.py -i project.json -t 0.3`   
-4. Run `../camera-trap-tools/scripts/`
+3. Run `script/json_to_csv.py` to get a human friendly output.  
+`python scripts/json_to_csv.py -i project.json -t 0.3`   
+4. Copy images from the original directories to subdirectories in a destination based on md classes.  
+`python ../scripts/collect_image_files.py -b ../data/ -i ../data/project.csv -o ./`
 
 
 ## ToDo  
