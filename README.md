@@ -15,9 +15,11 @@ See 202406pfleming for more commands.
 
 ## Workflow for testing
 1. start container dog-go-moo
-2. run MD ie `python -m megadetector.detection.run_detector_batch 'MDV5A' /project/ project.json --recursive --threshold 0.3`
-3. Run xxxx to process json to csv
-4. xxx
+2. run MD  
+`python -m megadetector.detection.run_detector_batch 'MDV5A' /project/ project.json --recursive --threshold 0.3`  
+3. Run `json_to_csv.py` to get a human friendly output.  
+`python ../camera-trap-tools/scripts/json_to_csv.py -i project.json -t 0.3`   
+4. Run `../camera-trap-tools/scripts/`
 
 
 ## ToDo  
