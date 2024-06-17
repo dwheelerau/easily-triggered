@@ -26,6 +26,9 @@ my_parser.add_argument('-o', '--out_basedir', metavar='OBASEDIR', type=str,
 my_parser.add_argument('-c', '--classes', metavar='CLASSES', type=int,
                        action='store', dest='classes', nargs='+',
                        required=True, help='target yolov10 classes')
+my_parser.add_argument('-a', '--all_images',
+                       action='store_true', required=False, 
+                       help='Copy all images in -i that are not included in --c to a dir called "other"')
 
 args = my_parser.parse_args()
 
@@ -116,14 +119,23 @@ target_detections = glob.glob(os.path.join(args.detection_basedir,'**','*.txt'),
 # sort the target classes
 args.classes.sort()
 
+# all images available
+if args.all_images:
+    all_images = glob.glob(os.path.join(args.image_basedir, '**','*.JPG'),
+                           recursive=True)
+
 for target in target_detections:
     detections = os.path.basename(target)
     image_subdir = target.replace(args.detection_basedir,'').split(os.sep)[0]
     detections_img = os.path.join(args.image_basedir, 
                                   image_subdir, 
                                   detections.replace('.txt', '.JPG'))
+    print('here')
+    print(detections_img)
+    # don't copy to the 'other' directory
+    if args.all_images:
+        all_images.remove(detections_img)
     with open(target) as rf:
-        print(target)
         detection_classes = []
         for line in rf:
             data = line.strip().split(' ')
@@ -135,7 +147,6 @@ for target in target_detections:
                 prob = None
             detection_classes.append((detection_class, prob))
         # this next bit of logic groups paired classes
-        print(detection_classes)
         if prob:
             uniq_detection_classes = [i[0] for i in detection_classes
                                        if i[1] > args.threshold and
@@ -157,5 +168,17 @@ for target in target_detections:
                 out_path = os.path.join(args.out_basedir, outdir, image_subdir)
                 os.makedirs(out_path, exist_ok=True)
                 shutil.copy2(detections_img, out_path)
-print("Note that if an image contains two classes, it will either")
-print("it may be duplicated when copying into each class directory")
+# -a all images not in -c copied to other 
+if args.all_images:
+    outdir = "other"
+    for image in all_images:
+        print(image)
+        image_subdir = image.split(os.sep)[-2]
+        out_path = os.path.join(args.out_basedir, outdir, image_subdir)
+        os.makedirs(out_path, exist_ok=True)
+        shutil.copy2(image, out_path)
+print()
+print("###########################################################")
+print("Note: If an image contains two classes not captured by the -c flag, the ")
+print("image file will be found duplicated as it will be copied into each class directory")
+print("###########################################################")
