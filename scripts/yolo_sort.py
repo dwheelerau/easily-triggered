@@ -26,9 +26,12 @@ my_parser.add_argument('-o', '--out_basedir', metavar='OBASEDIR', type=str,
 my_parser.add_argument('-c', '--classes', metavar='CLASSES', type=int,
                        action='store', dest='classes', nargs='+',
                        required=True, help='target yolov10 classes')
-my_parser.add_argument('-a', '--all_images',
+my_parser.add_argument('--all_true',
                        action='store_true', required=False, default=False,
                        help='Copy all images in -i that are not included in --c to a dir called "other"')
+my_parser.add_argument('--all_false',
+                       action='store_true', required=False, default=False,
+                       help='only included images in --c')
 
 args = my_parser.parse_args()
 
@@ -120,7 +123,7 @@ target_detections = glob.glob(os.path.join(args.detection_basedir,'**','*.txt'),
 args.classes.sort()
 
 # all images available
-if args.all_images:
+if args.all_true:
     all_images = glob.glob(os.path.join(args.image_basedir, '**','*.JPG'),
                            recursive=True)
 
@@ -131,7 +134,7 @@ for target in target_detections:
                                   image_subdir, 
                                   detections.replace('.txt', '.JPG'))
     # don't copy to the 'other' directory
-    if args.all_images:
+    if args.all_true:
         all_images.remove(detections_img)
     with open(target) as rf:
         detection_classes = []
@@ -167,7 +170,7 @@ for target in target_detections:
                 os.makedirs(out_path, exist_ok=True)
                 shutil.copy2(detections_img, out_path)
 # -a all images not in -c copied to other 
-if args.all_images:
+if args.all_true:
     outdir = "other"
     for image in all_images:
         image_subdir = image.split(os.sep)[-2]
