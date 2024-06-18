@@ -101,8 +101,12 @@ class xy xy xy xy confidence
 16 0.534338 0.533914 0.28263 0.911393 0.959702
 ```
 
-6. Run the `script/xx` to collect the outputs from yolo and copy the files to subdirectories [ToDo]  
-
+6. Run the `script/yolo_sort` to collect the outputs from yolo and copy the 
+files to subdirectories.   
+```
+# all_true copies images not in target classes to a dir called 'other'
+python scripts/yolo_sort.py -t 0.8 -b data/yolov10/ -i data/tmp/animal -c 16 19 -o yolo_sort/ --all_true
+```
 ## Yolo class labels
 ```
 0="person"
