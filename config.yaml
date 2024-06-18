@@ -1,1 +1,20 @@
+# MD config
 md-threshold: 0.3
+md-model: 'MDV5A'
+base_image_dir: /project/
+
+# yolov config
+yolo-model: /build/weights/yolov10l.pt
+create_images: False
+conf: 0.25
+# EDIT BELOW AS WELL
+classes: "[16,19]"
+
+# yolo sort config
+# "--all_true" or "--all_false"
+collect_all_images: "--all_true"
+sort_classes: "16 19"
+sort_threshold: 0.3
+
+
+
