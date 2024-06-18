@@ -49,7 +49,7 @@ RUN mkdir /build/weights
 
 # get the 10l weights
 RUN wget -P /build/weights/ -q https://github.com/jameslahm/yolov10/releases/download/v1.0/yolov10l.pt
-RUN conda install -y -c sconda-forge huggingface_hub
+RUN conda install -y -c conda-forge huggingface_hub
 
 RUN git clone https://dpidave@bitbucket.org/dpi_data_analytics/dog-go-moo.git
 
