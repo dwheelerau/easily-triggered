@@ -65,6 +65,6 @@ rule sort_yolov10:
 
 rule clean:
     shell:
-        "rm /project/project.* && rm -rf /project/megadetector && rm /project/megadetector-summary.txt "
-        "rm -rf /project/yolov10 rm /project/yolov10-summary.txt"
+        "rm -f /project/project.* && rm -rf /project/megadetector && rm -f /project/megadetector-summary.txt "
+        "rm -rf /project/yolov10 /project/yolo_sorted/ && rm -f /project/yolov10-summary.txt /project/yolov10-sort.log"
 
