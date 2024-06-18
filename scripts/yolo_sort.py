@@ -27,7 +27,7 @@ my_parser.add_argument('-c', '--classes', metavar='CLASSES', type=int,
                        action='store', dest='classes', nargs='+',
                        required=True, help='target yolov10 classes')
 my_parser.add_argument('-a', '--all_images',
-                       action='store_true', required=False, 
+                       action='store_true', required=False, default=False,
                        help='Copy all images in -i that are not included in --c to a dir called "other"')
 
 args = my_parser.parse_args()
