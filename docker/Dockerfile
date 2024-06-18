@@ -17,7 +17,7 @@ MAINTAINER Dave Wheeler NSWDPI
 
 # Set up ubuntu dependencies
 RUN apt-get update -y && \
-  DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends tzdata vim wget git build-essential git curl libgl1 libglib2.0-0 libsm6 libxrender1 libxext6 python3-opencv && \
+  DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends tzdata vim wget git build-essential git curl libgl1 libglib2.0-0 libsm6 libxrender1 libxext6 python3-opencv snakemake && \
   rm -rf /var/lib/apt/lists/*
 
 ###### 
@@ -49,6 +49,10 @@ RUN mkdir /build/weights
 
 # get the 10l weights
 RUN wget -P /build/weights/ -q https://github.com/jameslahm/yolov10/releases/download/v1.0/yolov10l.pt
-RUN conda install -y -c conda-forge huggingface_hub
+RUN conda install -y -c sconda-forge huggingface_hub
+
+RUN git clone https://dpidave@bitbucket.org/dpi_data_analytics/dog-go-moo.git
+
+RUN cd /build/dog-go-moo
 
 CMD /bin/bash
