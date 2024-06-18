@@ -11,7 +11,7 @@ rule megadetector:
         thresh=config["md-threshold"],
         model=config["md-model"]
     shell:
-        "python -m megadetector.detection.run_detector_batch {params.model} /project/ {output} --recursive --threshold {params.thresh}"
+        "python -m megadetector.detection.run_detector_batch {params.model} /project/ {output} --recursive --threshold {params.thresh} --checkpoint_frequency 1000"
 
 rule json_to_csv:
     input:
