@@ -13,33 +13,66 @@ however, only a limited number of
 [class labels](#yolo-class-labels) are
 available. 
 
-The container is tagged `dwheelerau/dog-go-moo:v0.5` and
-is based on a cuda base image to make Nvidia GPUs available.  
+The container is tagged `dwheelerau/dog-go-moo:v0.6` and
+is based on a cuda image to make Nvidia GPUs available for fast 
+inference.    
 
-## Quick start to process
+## Snakemake automated workflow  
+[Snakemake](https://snakemake.readthedocs.io/en/stable/) is used to make
+a reproducible analysis pipeline. A
+`config.yaml` file allows the workflow to be modified as required.  
+
+1. From docker desktop pull the image tagged `dwheelerau/dog-go-moo:v0.6`.  
+2. Copy your images to a common directory, ie `data`.  
+3. Open a terminal in the `data` directory.
+4. Find the image ID using `docker images` command.  
 ```
-# use `docker images` to find image ID, here it is eb25af9717a5
-docker run --gpus all -it -v `pwd`:/project eb25af9717a5 /bin/bash
-
-## Run MD batch detector
-python -m megadetector.detection.run_detector_batch 'MDV5A' cattle/ cattle-md.json
-
-## MD JSON to CSV conversion  
-python scripts/json_to_csv.py -i ./data/project.json -t 0.3   
-
-## Sort images into Animal, vehicle, person, empty based on CSV
-python ./scripts/collect_image_files.py -b ./data/ -i ./data/project.csv -o ./
-
-## RUn Yolov10 on the animal directory  
-yolo predict model=/build/weights/yolov10l.pt source=Animal/ conf=0.25 save_txt=True line_width=2 show_labels=True classes=[16,19]
+docker images
+#REPOSITORY                 TAG          IMAGE ID       CREATED             SIZE
+#dwheelerau/dog-go-moo      v0.6         ba21f33b2c0a   About an hour ago   12.4GB
 ```
+5. Use the image ID to create and login to a dog-go-moo container  
+Linux:  
+```
+docker run --gpus all -it -v `pwd`:/project ba21f33b2c0a /bin/bash
+```
+Or Windozs:  
+```
+# use ${PWD} for powershell
+docker run --gpus all -it -v %cd%:/project ba21f33b2c0a /bin/bash
+```
+6. Now inside the container, change into the dog-go-moo directory.  
+```
+cd /build/dog-go-moo
+```
+7. Check options in the `config.yaml` file. The probability cut-off values
+can be increased in false positives become an issue. The yolo config 
+`create_images` generates images with detections shown with boundary boxes
+creates copies of the original images so takes up disk space, but useful
+for testing to see how well the model is performing. If you need to edit this
+file use the nano or vim editor `nano config.yaml`.     
+```
+# MD config
+md-threshold: 0.3 # threshold for detection using MD
+md-model: 'MDV5A' # MD model
+base_image_dir: /project/ #image dir, dont change unless you know what you are doing
 
-The docker images are best used on Windoz systems using
-[Docker desktop](https://www.docker.com/products/docker-desktop/). 
-After it is installed search for the tagged image 
-`dwheelerau/dog-go-moo:v0.5`.  
+# yolov config
+yolo-model: /build/weights/yolov10l.pt # yolo weight file
+create_images: False # creates images with boundary boxes, useful for testing
+conf: 0.25 # detection probability cut-off for yolov10
+# EDIT BELOW AS WELL
+classes: "[16,19]" # list of classes you want to detect, here 16=dog, 19=cow
 
-## Workflow for testing
+# yolo sort config
+# "--all_true" or "--all_false" 
+collect_all_images: "--all_true" 
+sort_classes: "16 19" # should be the same as "classes" above
+sort_threshold: 0.25 # threshold, should be the same as used for yolo.  
+```
+8. Run `snakemake --cores all all` to run the pipeline.  
+
+## Step-by-step workflow if not using snakemake  
 1. Find the Docker image ID and start container dog-go-moo mounting the current
 working directory that contains your camera trap images.  
 ```
@@ -109,86 +142,86 @@ python scripts/yolo_sort.py -t 0.8 -b data/yolov10/ -i data/tmp/animal -c 16 19 
 ```
 ## Yolo class labels
 ```
-0="person"
-1="bicycle"
-"car"
-"motorcycle"
-"airplane"
-"bus"
-"train"
-"truck"
-"boat"
-"traffic light"
-"fire hydrant",
-"stop sign"
-"parking meter"
-"bench"
-14="bird"
-15="cat"
-16="dog"
-17="horse"
-18="sheep"
-19="cow"
-"elephant"
-"bear"
-"zebra",
-"giraffe"
-"backpack"
-"umbrella"
-"handbag"
-"tie"
-"suitcase"
-"frisbee"
-"skis"
-"snowboard"
-"sports ball"
-"kite",
-"baseball bat"
-"baseball glove"
-"skateboard"
-"surfboard"
-"tennis racket"
-"bottle"
-"wine glass"
-"cup"
-"fork"
-"knife",
-"spoon"
-"bowl"
-"banana"
-"apple"
-"sandwich"
-"orange"
-"broccoli"
-"carrot"
-"hot dog"
-"pizza"
-"donut"
-"cake"
-"chair",
-"couch"
-"potted plant"
-"bed"
-"dining table"
-"toilet"
-"tv"
-"laptop"
-"mouse"
-"remote"
-"keyboard"
-"cell phone",
-"microwave"
-"oven"
-"toaster"
-"sink"
-"refrigerator"
-"book"
-"clock"
-"vase"
-"scissors"
-"teddy bear"
-"hair drier"
-"toothbrush"
+	0:"person",
+    1:"bicycle",
+    2:"car",
+    3:"motorcycle",
+    4:"airplane",
+    5:"bus",
+    6:"train",
+    7:"truck",
+    8:"boat",
+    9:"traffic light",
+    10:"fire hydrant",
+    11:"stop sign",
+    12:"parking meter",
+    13:"bench",
+    14:"bird",
+    15:"cat",
+    16:"dog",
+    17:"horse",
+    18:"sheep",
+    19:"cow",
+    20:"elephant",
+    21:"bear",
+    22:"zebra",
+    23:"giraffe",
+    24:"backpack",
+    25:"umbrella",
+    26:"handbag",
+    27:"tie",
+    28:"suitcase",
+    29:"frisbee",
+    30:"skis",
+    31:"snowboard",
+    32:"sports ball",
+    33:"kite",
+    34:"baseball bat",
+    35:"baseball glove",
+    36:"skateboard",
+    37:"surfboard",
+    38:"tennis racket",
+    39:"bottle",
+    40:"wine glass",
+    41:"cup",
+    42:"fork",
+    43:"knife",
+    44:"spoon",
+    45:"bowl",
+    46:"banana",
+    47:"apple",
+    48:"sandwich",
+    49:"orange",
+    50:"broccoli",
+    51:"carrot",
+    52:"hot dog",
+    53:"pizza",
+    54:"donut",
+    55:"cake",
+    56:"chair",
+    57:"couch",
+    58:"potted plant",
+    59:"bed",
+    60:"dining table",
+    61:"toilet",
+    62:"tv",
+    63:"laptop",
+    64:"mouse",
+    65:"remote",
+    66:"keyboard",
+    67:"cell phone",
+    68:"microwave",
+    69:"oven",
+    70:"toaster",
+    71:"sink",
+    72:"refrigerator",
+    73:"book",
+    74:"clock",
+    75:"vase",
+    76:"scissors",
+    77:"teddy bear",
+    78:"hair drier",
+    79:"toothbrush"
 ```
 
 
