@@ -130,8 +130,6 @@ for target in target_detections:
     detections_img = os.path.join(args.image_basedir, 
                                   image_subdir, 
                                   detections.replace('.txt', '.JPG'))
-    print('here')
-    print(detections_img)
     # don't copy to the 'other' directory
     if args.all_images:
         all_images.remove(detections_img)
@@ -172,7 +170,6 @@ for target in target_detections:
 if args.all_images:
     outdir = "other"
     for image in all_images:
-        print(image)
         image_subdir = image.split(os.sep)[-2]
         out_path = os.path.join(args.out_basedir, outdir, image_subdir)
         os.makedirs(out_path, exist_ok=True)
