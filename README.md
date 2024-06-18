@@ -15,7 +15,14 @@ available.
 
 The container is tagged `dwheelerau/dog-go-moo:v0.6` and
 is based on a cuda image to make Nvidia GPUs available for fast 
-inference.    
+inference. On my computer with a GeForce GTX 1660 super it took 50 minutes to 
+process ~15,000 camera trap images through both Megadetector and
+yolo.     
+
+The pipeline includes scripts that use the MD/Yolo data to partition
+the camera trap images based on specific classes: animal, empty, via MD, 
+and custom classes available through yolo inference  
+see classes [class labels](#yolo-class-labels).   
 
 ## Snakemake automated workflow  
 [Snakemake](https://snakemake.readthedocs.io/en/stable/) is used to make
@@ -71,6 +78,25 @@ sort_classes: "16 19" # should be the same as "classes" above
 sort_threshold: 0.25 # threshold, should be the same as used for yolo.  
 ```
 8. Run `snakemake --cores all all` to run the pipeline.  
+
+OR 
+
+To just to run megadetector use `snakemake --cores all megadetector` and
+then to create a summary CSV run `snakemake --cores all json_to_csv`. The
+final results will be summarised in `project.csv`.  
+
+## Outputs   
+
+| file        | desc |  
+|-------------|------|
+| project.csv | Number of MD detections for each image |
+|megadetector-summary.txt | Summary of results for MD detections |
+| megadetector| Images sorted by MD: animal, empty, person, vehicle    |
+| yolov10     | Yolo detection files                                |
+|  yolov10-summary.txt      | Yolo run log                 |
+| yolo_sorted | MD class 'animal' images sorted based on user defined classes |
+|              |                     |
+
 
 ## Step-by-step workflow if not using snakemake  
 1. Find the Docker image ID and start container dog-go-moo mounting the current
