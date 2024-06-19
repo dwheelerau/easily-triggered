@@ -1,6 +1,6 @@
 # Dog-go-moo
 
-<img src="dog-go-moo.jpeg" alt="dog-go-moo" width="200"/>
+<img src="dog-go-moo.jpeg" alt="dog-go-moo" width="100"/>
 
 A docker container with [megadetector](https://github.com/microsoft/CameraTraps/blob/main/megadetector.md) 
 v5 and [yolov10](https://github.com/THU-MIG/yolov10) models installed. 
