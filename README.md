@@ -253,3 +253,8 @@ python scripts/yolo_sort.py -t 0.8 -b data/yolov10/ -i data/tmp/animal -c 16 19 
 
 ## ToDo  
 Modify the docker file to include a repo of scripts for processing the outputs from the models.  
+
+## License  
+See MIT license (see LICENSE).  
+
+Please see the [megadetector](https://github.com/microsoft/CameraTraps?tab=readme-ov-file) (MIT) and [YOLOv10](https://github.com/THU-MIG/yolov10) repos for assoc licenses (GNU Affero General Public License v3.0).  
