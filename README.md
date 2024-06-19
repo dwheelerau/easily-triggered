@@ -1,9 +1,12 @@
 # Dog-go-moo
+
+![dog-go-moo](dog-go-moo.jpeg)
+
 A docker container with [megadetector](https://github.com/microsoft/CameraTraps/blob/main/megadetector.md) 
 v5 and [yolov10](https://github.com/THU-MIG/yolov10) models installed. 
 This will facility rapid removal of 
 empty images from camera trap datasets. In my testing the 
-false negative rate is less than 1%. The false positive rate 
+false negative rate is <1%. The false positive rate 
 is somewhat higher (~3-5%) depending on the
 background.  
 
