@@ -127,9 +127,10 @@ The above command copies the images into directories in a directory called
 `sorted` in your current working directory.  
 
 ## ToDo  
-GUI app for config and run.  
+- GUI flask app for config and run.  
+- Good instructions for ecologists using windozs.  
 
 ## License  
 See MIT license (see [LICENSE](LICENSE).  
 
-Please see the [megadetector](https://github.com/microsoft/CameraTraps?tab=readme-ov-file) (MIT).    
+The licence for [megadetector](https://github.com/microsoft/CameraTraps?tab=readme-ov-file) (MIT).    
