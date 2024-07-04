@@ -131,6 +131,6 @@ The above command copies the images into directories in a directory called
 - Good instructions for ecologists using windozs.  
 
 ## License  
-See MIT license (see [LICENSE](LICENSE).  
+See MIT license (see [LICENSE](LICENCE) ).  
 
 The licence for [megadetector](https://github.com/microsoft/CameraTraps?tab=readme-ov-file) (MIT).    
