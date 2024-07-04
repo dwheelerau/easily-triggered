@@ -1,0 +1,5 @@
+
+# MD config
+md-threshold: {{ prob }}
+md-model: 'MDV5A'
+base_image_dir: /project/

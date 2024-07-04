@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+Please provide key details of the project so the pipeline will run correctly. Note
+defaults are reasonable settings for most projects. 
+
+<form method="post" enctype="multipart/form-data">
+  Probability cut-off for detection: <input name="prob" value="0.3"/>
+  <br><br>
+  <button type="submit">AI - Go to work!!</button>
+</form>
+
+{% endblock %}

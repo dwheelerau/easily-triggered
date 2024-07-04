@@ -13,11 +13,11 @@
 #FROM nvidia/cuda:11.2.0-cudnn8-devel-ubuntu20.04
 #MAINTAINER Dave Wheeler NSWDPI
 FROM nvidia/cuda:12.2.0-base-ubuntu22.04
-MAINTAINER Dave Wheeler NSWDPI
+MAINTAINER Dave Wheeler
 
 # Set up ubuntu dependencies
 RUN apt-get update -y && \
-  DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends tzdata vim wget git build-essential git curl libgl1 libglib2.0-0 libsm6 libxrender1 libxext6 python3-opencv snakemake && \
+  DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends python3-urllib3 tzdata vim nano wget git build-essential git curl libgl1 libglib2.0-0 libsm6 libxrender1 libxext6 python3-opencv snakemake && \
   rm -rf /var/lib/apt/lists/*
 
 ###### 
@@ -42,17 +42,14 @@ RUN pip --version
 #RUN pip install PytorchWildlife
 RUN pip install megadetector
 
-# Yolov10
-RUN pip install -q git+https://github.com/THU-MIG/yolov10.git
+# install flask
+RUN conda install flask jinja2
 
-RUN mkdir /build/weights
+# clone the repo
+RUN git clone https://github.com/dwheelerau/easily-triggered.git
 
-# get the 10l weights
-RUN wget -P /build/weights/ -q https://github.com/jameslahm/yolov10/releases/download/v1.0/yolov10l.pt
-RUN conda install -y -c conda-forge huggingface_hub
+WORKDIR /build/easily-triggered.git
 
-RUN git clone https://dpidave@bitbucket.org/dpi_data_analytics/dog-go-moo.git
-
-RUN cd /build/dog-go-moo
-
-CMD /bin/bash
+EXPOSE 5000
+RUN chmod +x App.py
+ENTRYPOINT ["./App.py"]
