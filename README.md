@@ -9,7 +9,7 @@ false negative rate is <1%. The false positive rate
 is somewhat higher (~3-5%) depending on the
 background. *Note* I've noticed that inclusion of bait stations in the frame can
 increase the rate of false positive animal detections when the image should be
-empty.     
+empty. GPU support is out of the box.       
 
 The container is tagged `dwheelerau/easily-triggered:v0.1` and
 is based on a cuda image to make Nvidia GPUs available for fast 
