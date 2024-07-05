@@ -52,25 +52,11 @@ def index():
     #setup(script_path)
     return render_template('index.html')
 
-@app.route('/infer', methods=['POST'])
+@app.route('/infer')
 # upload_image
 def upload():
-    print("called POST")
-    # this refers to a form in index.html
-    file_list = request.files.getlist('file')
-    if len(file_list)>0: 
-        for file in file_list:
-            filename = os.path.basename(file.filename)
-            dst = os.path.join(FASTQ_FOLDER, filename)
-            #print(dst)
-            #print(dst)
-            # this copies I really just want to select the dir
-            #file.save(dst)
-        return redirect(url_for('edit_config'))
-
-    else:
-        flash('please select a dir')
-        return redirect(request.url)
+    print("/infer")
+    return redirect(url_for('edit_config'))
 
 # config
 @app.route('/config', methods=['GET', 'POST'])

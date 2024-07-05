@@ -13,7 +13,7 @@
 #FROM nvidia/cuda:11.2.0-cudnn8-devel-ubuntu20.04
 #MAINTAINER Dave Wheeler NSWDPI
 FROM nvidia/cuda:12.2.0-base-ubuntu22.04
-MAINTAINER Dave Wheeler
+LABEL author="Dave Wheeler"
 
 # Set up ubuntu dependencies
 RUN apt-get update -y && \
@@ -46,6 +46,7 @@ RUN pip install megadetector
 RUN conda install flask jinja2
 
 # clone the repo
+ARG CACHEBUST=1 
 RUN git clone https://github.com/dwheelerau/easily-triggered.git
 
 WORKDIR /build/easily-triggered
