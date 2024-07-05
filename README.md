@@ -31,7 +31,17 @@ megadetector/empty/RECONX101/empty-image.jpg
 ```
 
 ## GUI workflow  
-ToDo  
+Add better instructions.  
+
+1. Start docker desktop.  
+2. Open a terminal from the directory containing the images  
+3. Then:   
+```
+docker images
+## get image ID, here it is b148546c199a
+docker run -it -v `pwd`:/project b148546c199a /bin/bash
+# open web browser to http://172.17.0.2:5000/
+```
 
 ## Snakemake automated workflow  
 [Snakemake](https://snakemake.readthedocs.io/en/stable/) is used to make

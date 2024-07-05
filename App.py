@@ -28,17 +28,10 @@ def runner():
     time.sleep(10)
     return 1
 
-
 # Setting up Flask
 script_path = os.path.abspath(os.path.dirname(__file__)) #os.path.realpath(__file__)
-FASTQ_FOLDER = os.path.join(script_path, 'snakemake-qiime-edna2','fastq_data')
-RUN_LOG_FILE = os.path.join(script_path, 'snakemake-qiime-edna2','logs', 'runlog.txt')
-DATABASE_FOLDER = os.path.join(script_path, 'snakemake-qiime-edna2', 'database',
-                               'qiime2-qza')
 
-#STATIC_FOLDER = os.path.join(os.getcwd(), 'static')
 STATIC_FOLDER = os.path.join(script_path, 'static')
-#print(FASTQ_FOLDER)
 
 app = Flask(__name__, static_url_path=STATIC_FOLDER, static_folder=STATIC_FOLDER)
 app.secret_key = "secret_key"
@@ -49,9 +42,9 @@ def index():
     # kill any hanging processes and cleanup
     kill()
     cleanup()
-    # Not used but might be useful with modification
-    #setup(script_path)
-    return render_template('index.html')
+    dirs = [x[1] for x in os.walk('/project/')][0]
+    print(dirs)
+    return render_template('index.html', dirs=dirs)
 
 @app.route('/infer')
 # upload_image

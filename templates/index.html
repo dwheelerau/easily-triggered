@@ -20,7 +20,11 @@
   <div class="mb-4 col-md-8 offset-md-5">
     <form action="/infer" enctype="multipart/form-data">
       <div>
-        place holder for folder list
+	      <ul>
+		{% for dir in dirs %}
+		    <li style="list-style-type: none;">{{dir}}</li>
+		{% endfor %}
+	     </ul>
       </div>
       <div class="input-group">
 	<div class="input-group-append">
