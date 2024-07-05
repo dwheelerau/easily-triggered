@@ -1,4 +1,3 @@
-
 # MD config
 md-threshold: {{ prob }}
 md-model: 'MDV5A'

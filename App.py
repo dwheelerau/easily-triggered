@@ -11,9 +11,9 @@ from jinja2 import Template
 import codecs
 
 # Not used but might be useful with modification
-def cleanup(script_path):
+def cleanup():
     print('cleanup!')
-    snakemake_clean_cmd = 'snakemake --cores all --snakefile %s/snakemake-qiime-edna2/Snakefile --directory %s/snakemake-qiime-edna2/ clean'%(script_path,script_path)
+    snakemake_clean_cmd = 'snakemake --cores all clean'
     snakemake_clean_cmd = snakemake_clean_cmd.split()
     subprocess.run(snakemake_clean_cmd, shell=False)
 
@@ -47,7 +47,7 @@ app.secret_key = "secret_key"
 @app.route('/')
 def index():
     # Not used but might be useful with modification
-    #cleanup(script_path)
+    cleanup()
     # Not used but might be useful with modification
     #setup(script_path)
     return render_template('index.html')
@@ -62,8 +62,8 @@ def upload():
         for file in file_list:
             filename = os.path.basename(file.filename)
             dst = os.path.join(FASTQ_FOLDER, filename)
-            print(dst)
-            print(dst)
+            #print(dst)
+            #print(dst)
             # this copies I really just want to select the dir
             #file.save(dst)
         return redirect(url_for('edit_config'))
@@ -79,11 +79,12 @@ def edit_config():
         data = {
                 'prob':request.form['prob'],
                 }
-        config_path = script_path + './config-template.yaml'
+        print(data)
+        config_path = script_path + '/config-template.yaml'
         with open(config_path) as rf:
             template = Template(rf.read(), trim_blocks=True)
         render_file = template.render(data)
-        config_out_path = script_path + 'config.yaml'
+        config_out_path = script_path + '/config.yaml'
         outfile = codecs.open(config_out_path, 'w', 'utf-8')
         outfile.write(render_file)
         outfile.close()
@@ -109,7 +110,7 @@ def running():
 
 @app.route('/pipeline')
 def pipeline():
-    snakemake_run_cmd = 'snakemake --cores all --snakefile Snakefile --directory ./ all'%(script_path, script_path)
+    snakemake_run_cmd = 'snakemake --cores all all'
     snakemake_run_cmd = snakemake_run_cmd.split()
     subprocess.run(snakemake_run_cmd, shell=False)
     #zip_cmd = 'zip -FSr %s/static/results.zip %s/snakemake-qiime-edna2'%(script_path,script_path)

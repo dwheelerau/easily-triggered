@@ -35,5 +35,4 @@ rule sort_md:
 
 rule clean:
     shell:
-        "rm -f /project/project.* && rm -rf /project/megadetector && rm -f /project/megadetector-summary.txt "
-        "rm -rf /project/yolov10 /project/yolo_sorted/ && rm -f /project/yolov10-summary.txt /project/yolov10-sort.log"
+        "rm -f /project/project.* && rm -rf /project/megadetector && rm -f /project/megadetector-summary.txt"

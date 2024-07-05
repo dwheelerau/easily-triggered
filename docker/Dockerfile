@@ -48,7 +48,7 @@ RUN conda install flask jinja2
 # clone the repo
 RUN git clone https://github.com/dwheelerau/easily-triggered.git
 
-WORKDIR /build/easily-triggered.git
+WORKDIR /build/easily-triggered
 
 EXPOSE 5000
 RUN chmod +x App.py
