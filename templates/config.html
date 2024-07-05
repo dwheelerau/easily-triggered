@@ -2,13 +2,29 @@
 
 {% block content %}
 
-Please provide key details of the project so the pipeline will run correctly. Note
-defaults are reasonable settings for most projects. 
+<h2 style="text-align: center">Important configuration settings</h2>
 
-<form method="post" enctype="multipart/form-data">
-  Probability cut-off for detection: <input name="prob" value="0.3"/>
-  <br><br>
-  <button type="submit">AI - Go to work!!</button>
-</form>
+<div class="row justify-content-md-center">
+  Megadetector provides a probability of an animal detection. This can 
+  be used as a
+  cut-off to avoid too many false positives or false negatives. It is worth
+  optimising this value as the best value will depend on the data. The 
+  options are a range from 0.0 to 1.0. We recommend a value of 0.2-0.5,
+  with 0.3 as the default. A value of 0.3 sets the detection cut-off at
+  a probability (of an animal) of 30%.  
+</div>
+
+<hr>
+
+<div class="row justify-content-md-center">
+	<form method="post" enctype="multipart/form-data" 
+		style="color: red">
+	  Probability cut-off for detection: 
+	  <br>
+	  <input name="prob" value="0.3"/>
+	  <br><br>
+	  <button type="submit">AI please filter my images!</button>
+	</form>
+</div>
 
 {% endblock %}
