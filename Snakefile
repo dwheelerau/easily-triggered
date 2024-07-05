@@ -36,3 +36,8 @@ rule sort_md:
 rule clean:
     shell:
         "rm -f /project/project.* && rm -rf /project/megadetector && rm -f /project/megadetector-summary.txt"
+
+rule kill:
+    shell:
+        "for pid in $(ps -ef | grep 'megadetector' | awk '{{print $2}}'); do kill -9 $pid; done"
+

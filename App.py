@@ -17,11 +17,11 @@ def cleanup():
     snakemake_clean_cmd = snakemake_clean_cmd.split()
     subprocess.run(snakemake_clean_cmd, shell=False)
 
-def setup(script_path):
-    print('setup!')
-    snakemake_setup_cmd = 'snakemake --cores all --snakefile %s/snakemake-qiime-edna2/Snakefile --directory %s/snakemake-qiime-edna2/ setup'%(script_path,script_path)
-    snakemake_setup_cmd = snakemake_setup_cmd.split()
-    subprocess.run(snakemake_setup_cmd, shell=False)
+def kill():
+    print('Killing PID!')
+    snakemake_kill_cmd = 'snakemake --cores all kill'
+    snakemake_kill_cmd = snakemake_kill_cmd.split()
+    subprocess.run(snakemake_kill_cmd, shell=False)
 
 def runner():
     print("running!")
@@ -46,7 +46,8 @@ app.secret_key = "secret_key"
 # home page
 @app.route('/')
 def index():
-    # Not used but might be useful with modification
+    # kill any hanging processes and cleanup
+    kill()
     cleanup()
     # Not used but might be useful with modification
     #setup(script_path)
