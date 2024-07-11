@@ -46,7 +46,7 @@ RUN pip install megadetector
 RUN conda install flask jinja2
 
 # clone the repo
-ARG CACHEBUST=3 
+ARG CACHEBUST=5
 RUN git clone https://github.com/dwheelerau/easily-triggered.git
 
 WORKDIR /build/easily-triggered

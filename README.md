@@ -1,6 +1,6 @@
 # Easily-triggered  
 
-<img src="logo.jfif" width="100" height="100" />
+<img src="./imgs/logo.jfif" width="100" height="100" />
 
 A docker container with [megadetector](https://github.com/microsoft/CameraTraps/blob/main/megadetector.md) 
 v5. This will facility rapid removal of 
@@ -30,12 +30,30 @@ megadetector/animal/RECONX100/kangaroo-image.jpg
 megadetector/empty/RECONX101/empty-image.jpg  
 ```
 
-## GUI workflow  
-Add better instructions.  
+## GUI workflow for Windows users  
+1. Install [Docker desktop](https://docs.docker.com/desktop/install/windows-install/)  
+2. Start docker desktop and search for `dwheelerau/easily-triggered` in the search bar at the top of the app  
+![Search for the app](./imgs/seach.png)  
+3. Click the "pull" button (circled in the figure above) to obtain a copy of the image (~12GB download so this may take some time)      
+4. Click on the `images` tab on the left hand panel (boxed in red) and then click the "play" button (yellow circle) to create a container for this image   
+![create a container](imgs/images.png)
+5. In the next step we are going to mount a directory containing our camera trap images inside the container, we will also create an open port that will allow our computer to interact with the docker container using the web-browser (note no internet connection is made here, it is all being run locally on your own computer)  
+6. After clicking the play button, use the 'Option settings' drop down to add the following settings (see image below):
+```
+host port: 5000
+Host path: path-to-a-directory-containing-your-images
+container path: /project
+```
+![option settings](imgs/settings.png)  
+In my case, I set the host path by using the three dots to navigate to a folder called `data` on the desktop (this folder contains two sub-foldrs with images called `100RECNX` and `101RECNX`)    
+7. Click the "Run" button, which should bring up a terminal type window that lists the IP address that allow you to access the app (boxed below)   
+![terminal](imgs/addresses.png)  
+8. Click on the first IP address and a web-browser window should open showing the welcome page, the image directories that you provided in the `host path` setting should be displayed (boxed below) 
+![welcome screen](imgs/welcome.png)  
+9. Click the "process this data" button to goto the settings page  
+10. Here.   
 
-1. Start docker desktop.  
-2. Open a terminal from the directory containing the images  
-3. Then:   
+
 ```
 docker images
 ## get image ID, here it is b148546c199a, expose 5000
