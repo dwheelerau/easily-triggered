@@ -13,32 +13,32 @@
     <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
       <h1 class="display-4">The easily-triggered app</h1>
       <p class="lead">Use AI to remove empty images from camera trap datasets.<br> 
-      <p>Use AI to remove empty images from camera trap datasets.<br> 
+      <p>The following image directories are available for processing using the App<br> 
     </div>
   </div>
 </div>
 <div class="row">
   <div class="mb-4 col-md-8 offset-md-5">
-    <form action="/infer" enctype="multipart/form-data">
-      <div>
+    <div>
 	      <ul>
 		{% for dir in dirs %}
 		    <li style="list-style-type: none;">{{dir}}</li>
 		{% endfor %}
 	     </ul>
       </div>
-    </form>
   </div>
 </div>
 <div class="row">
   <div class="col-md-8 offset-md-5">
     <div class="pricing-header py-3 pt-md-1 pb-md-0 mx-auto">
-      <div class="input-group">
+      <form action="/infer" enctype="multipart/form-data">
+	<div class="input-group">
 	<div class="input-group-append">
           <input type="submit" value="Click here to process this data"  class="btn btn-outline-primary" type="button"
             id="inputGroupFileAddon04" /> 
         </div>
       </div>
+      </form>
     </div>
   </div>
 </div>
