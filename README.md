@@ -38,8 +38,8 @@ Add better instructions.
 3. Then:   
 ```
 docker images
-## get image ID, here it is b148546c199a
-docker run -it -v `pwd`:/project b148546c199a /bin/bash
+## get image ID, here it is b148546c199a, expose 5000
+docker run -p 5000:5000 -it -v `pwd`:/project 0c0bbeef23c5 /bin/bash
 # open web browser to http://172.17.0.2:5000/
 ```
 
