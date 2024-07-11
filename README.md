@@ -51,9 +51,15 @@ In my case, I set the host path by using the three dots to navigate to a folder 
 8. Click on the first IP address and a web-browser window should open showing the welcome page, the image directories that you provided in the `host path` setting should be displayed (boxed below) 
 ![welcome screen](imgs/welcome.png)  
 9. Click the "process this data" button to goto the settings page  
-10. Here.   
+10. The probability cut-off setting allows you to change the specificity of the image detection, if you want to capture all animals (at the risk of false positives) set a lower value (ie 0.2), if you want to avoid false positives (non-animal detections) set this as a higher value (ie 0.8). The default (0.3) is a good compromise setting.  
+11. Click the `AI please filter my images` button to start the AI detection and a new 'running' window should open. A error window will appear if something goes wrong. 
 
+The run-time of the app will depend on if you have a GPU available. 
+![running](imgs/running.png)  
 
+When the app if finished a new window will display. The results will be in the same directory that contains your images, in a folder called `megadetector`. The images will be sorted in to animal, human, empty, and vechile.   
+
+## Command line instructions
 ```
 docker images
 ## get image ID, here it is b148546c199a, expose 5000
