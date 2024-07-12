@@ -73,7 +73,8 @@ need to tell the app where it is (instructions below).
 
 1. Follow steps 1-4 in the GUI workflow above to obtain a copy of the app image from the docker hub  
 2. Use the file explorer to navigate to the parent directory of your camera trap
-images then type "cmd" in the file path search bar at the top of the window    
+images then type "cmd" in the file path search bar at the top of the window 
+and press ENTER      
 ![file explorer](imgs/cmd.png)    
 3. Type `docker images` in the terminal window, a list of available images
 should be shown, copy the image ID (circled below, note your ID will be 
@@ -85,15 +86,15 @@ docker run --gpus all -p 5000:5000 -it -v %cd%:/project 8bd4b2444202 /bin/bash
 ```
 The following should print out on the terminal window, hold [CTRL] and click on
 either of the IP addresses (if one doesn't work, try the other one), a browser
-window should open (note not data is sent over the internet, all processing
-is done locally)  
+window should open (no data is sent over the internet, all processing is
+done locally on your own computer)  
 ![Running](imgs/runcmd.png)  
 5. Hopefully you should be greated with the Apps welcome page. If so follow
 the GUI instructions from step 8 to configure the app.  
  
 ## Outputs   
-Besides the images which are sorted and copied to `megadetector`, the following
-files are generated.  
+Besides the images that are sorted and copied to the `megadetector` folder
+, the following files are also generated which summarise the results.    
 
 | file or folder        | desc |  
 |-------------|------|
