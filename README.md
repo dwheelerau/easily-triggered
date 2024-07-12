@@ -202,9 +202,10 @@ The above command copies the images into directories in a directory called
 `sorted` in your current working directory.  
 
 ## ToDo  
-- ?
+- Develop a web based service (that would cost me money, so not really interested, but would be cool)  
 
 ## License  
-See MIT license (see [LICENSE](LICENCE) ).  
+Released under a permissive MIT [LICENSE](LICENCE).  
 
-The licence for [megadetector](https://github.com/microsoft/CameraTraps?tab=readme-ov-file) (MIT).    
+[megadetector](https://github.com/microsoft/CameraTraps?tab=readme-ov-file) is also released 
+under a MIT licence.   
