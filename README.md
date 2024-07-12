@@ -31,6 +31,8 @@ megadetector/empty/RECONX101/empty-image.jpg
 ```
 
 ## GUI workflow for Windows users  
+**NOTE** Unfortunitly, if you have a GPU available you will have to use the [command line instructions below](##command-line-instructions). A GPU will speed up the inference by about 10x, depending on how good it is. However, if you don't have a GPU or have plenty of time on your hands or the terminal scares you or you want to get started quickly - read on.  
+
 1. Install [Docker desktop](https://docs.docker.com/desktop/install/windows-install/)  
 2. Start docker desktop and search for `dwheelerau/easily-triggered` in the search bar at the top of the app  
 ![Search for the app](./imgs/seach.png)  
@@ -59,7 +61,37 @@ The run-time of the app will depend on if you have a GPU available.
 
 When the app if finished a new window will display. The results will be in the same directory that contains your images, in a folder called `megadetector`. The images will be sorted in to animal, human, empty, and vechile.   
 
-## Command line instructions
+
+## Command line instructions  
+GPU means much faster, the command line instructions are not that difficult, so don't be affraid to give them a go. The following instructions are based on an
+example where the camera trap images are stored in a folder on the desktop
+called `data`. In reality this data can be stored anywhere, but you do
+need to tell the app where it is (instructions below).   
+
+1. Follow steps 1-4 in the GUI workflow above to obtain a copy of the app image from the docker hub  
+2. Use the file explorer to navigate to the parent directory of your camera trap
+images then type "cmd" in the file path search bar at the top of the window    
+![file explorer](imgs/cmd.png)    
+3. Type `docker images` in the terminal window, a list of available images
+should be shown, copy the image ID (circled below, note your ID will be 
+different)    
+![docker images](imgs/imgs.png)
+4. Using this ID we will start the container with GPU support and mount your current directory (replace `8bd4b2444202` with your image ID from above)   
+```
+docker run --gpus all -p 5000:5000 -it -v %cd%:/project 8bd4b2444202 /bin/bash
+```
+The following should print out on the terminal window, hold [CTRL] and click or
+copy either of the either
+of the IP addresses (if one doesn't work, try the other one), a browser
+window should open (note not data is sent over the internet, all processing
+is done locally)  
+![Running](imgs/runcmd.png)
+5. Hopefully you should be greated with the Apps welcome page. If so follow
+the GUI instructions from step 8 to configure the app.  
+            
+
+## Command line for linux  
+
 ```
 docker images
 ## get image ID, here it is b148546c199a, expose 5000
@@ -161,8 +193,7 @@ The above command copies the images into directories in a directory called
 `sorted` in your current working directory.  
 
 ## ToDo  
-- GUI flask app for config and run.  
-- Good instructions for ecologists using windozs.  
+- ?
 
 ## License  
 See MIT license (see [LICENSE](LICENCE) ).  
