@@ -9,7 +9,7 @@ false negative rate is <1%. The false positive rate
 is somewhat higher (~3-5%) depending on the
 background. I've noticed that inclusion of bait stations in the frame can
 increase the rate of false positive animal detections when the image should be
-empty. GPU support is out of the box.       
+empty.   
 
 The container is tagged `dwheelerau/easily-triggered:v0.1` and
 is based on a cuda image to make Nvidia GPUs available for fast 
@@ -66,7 +66,8 @@ When the app if finished a new window will display. The results will be in the s
 
 
 ## Command line instructions  
-GPU means much faster inference! The command line instructions are not that difficult, so don't be affraid to give them a go. The following instructions are based on an
+These instructions are for windows users. GPU means much faster inference! The command line 
+steps are not that difficult, so don't be affraid to give them a go. The following instructions are based on an
 example where the camera trap images are stored in a folder on the desktop
 called `data`. In reality this data can be stored anywhere, but you do
 need to tell the app where it is (instructions below).   
