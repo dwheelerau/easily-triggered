@@ -34,7 +34,7 @@ This app should be safe, but **PLEASE BACKUP YOUR DATA**, I'm a random
 person on the internet after all!!
 
 ## GUI workflow for Windows users  
-**NOTE** Unfortunately, if you have a GPU available you will have to use the [command line instructions below](#command-line-instructions). A GPU will speed up the inference by about 10x, depending on how good it is. However, if you don't have a GPU or have plenty of time on your hands or the terminal scares you or you want to get started quickly - read on.  
+**NOTE** Unfortunately, if you have a GPU available you will have to use the [command line instructions below](#command-line-instructions-for-windows). A GPU will speed up the inference by about 10x, depending on how good it is. However, if you don't have a GPU or have plenty of time on your hands or the terminal scares you or you want to get started quickly - read on.  
 
 1. Install [Docker desktop](https://docs.docker.com/desktop/install/windows-install/)  
 2. Start docker desktop and search for `dwheelerau/easily-triggered` in the search bar at the top of the app  
@@ -65,8 +65,8 @@ The run-time of the app will depend on if you have a GPU available.
 When the app if finished a new window will display. The results will be in the same directory that contains your images, in a folder called `megadetector`. The images will be sorted in to animal, human, empty, and vechile.   
 
 
-## Command line instructions  
-These instructions are for windows users. GPU means much faster inference! The command line 
+## Command line instructions for windows   
+GPU means much faster inference! The command line 
 steps are not that difficult, so don't be affraid to give them a go. The following instructions are based on an
 example where the camera trap images are stored in a folder on the desktop
 called `data`. In reality this data can be stored anywhere, but you do
@@ -114,7 +114,11 @@ docker run -p 5000:5000 -it -v `pwd`:/project 0c0bbeef23c5 /bin/bash
 # open web browser to http://172.17.0.2:5000/
 ```
 
-## Snakemake automated workflow  
+## Snakemake automated workflow for those who are interested    
+The following is just some notes for using the pipeline without the GUI,
+there is no real advantage here, but I've left this here for historical 
+purposes.  
+
 [Snakemake](https://snakemake.readthedocs.io/en/stable/) is used to make
 a reproducible analysis pipeline. A
 `config.yaml` file allows the workflow to be modified as required.  
