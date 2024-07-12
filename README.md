@@ -17,7 +17,7 @@ inference. On my computer with a GeForce GTX 1660 super it took 40 minutes to
 process ~15,000 camera trap images through Megadetector.  
 
 The pipeline includes scripts that use the MD data to partition
-the camera trap images based on specific classes: animal, empty.   A CSV file is 
+the camera trap images based on specific classes: animal, empty, vechile, person.  A CSV file is 
 also created that contains a summary of the detection results. The original 
 directory structure and filenames are retained. So:
 ```
@@ -29,6 +29,9 @@ Will be *copied* into:
 megadetector/animal/RECONX100/kangaroo-image.jpg  
 megadetector/empty/RECONX101/empty-image.jpg  
 ```
+
+This app should be safe, but **PLEASE BACKUP YOUR DATA**, I'm a random
+person on the internet after all!!
 
 ## GUI workflow for Windows users  
 **NOTE** Unfortunately, if you have a GPU available you will have to use the [command line instructions below](#command-line-instructions). A GPU will speed up the inference by about 10x, depending on how good it is. However, if you don't have a GPU or have plenty of time on your hands or the terminal scares you or you want to get started quickly - read on.  
