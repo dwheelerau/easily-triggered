@@ -63,7 +63,7 @@ When the app if finished a new window will display. The results will be in the s
 
 
 ## Command line instructions  
-GPU means much faster, the command line instructions are not that difficult, so don't be affraid to give them a go. The following instructions are based on an
+GPU means much faster inference! The command line instructions are not that difficult, so don't be affraid to give them a go. The following instructions are based on an
 example where the camera trap images are stored in a folder on the desktop
 called `data`. In reality this data can be stored anywhere, but you do
 need to tell the app where it is (instructions below).   
@@ -80,15 +80,25 @@ different)
 ```
 docker run --gpus all -p 5000:5000 -it -v %cd%:/project 8bd4b2444202 /bin/bash
 ```
-The following should print out on the terminal window, hold [CTRL] and click or
-copy either of the either
-of the IP addresses (if one doesn't work, try the other one), a browser
+The following should print out on the terminal window, hold [CTRL] and click on
+either of the IP addresses (if one doesn't work, try the other one), a browser
 window should open (note not data is sent over the internet, all processing
 is done locally)  
-![Running](imgs/runcmd.png)
+![Running](imgs/runcmd.png)  
 5. Hopefully you should be greated with the Apps welcome page. If so follow
 the GUI instructions from step 8 to configure the app.  
-            
+ 
+## Outputs   
+Besides the images which are sorted and copied to `megadetector`, the following
+files are generated.  
+
+| file or folder        | desc |  
+|-------------|------|
+| project.csv | Number of MD detections for each image |
+| megadetector-summary.txt | Summary of results for MD detections |
+| megadetector| Images sorted by MD: animal, empty, person, vehicle    |
+|              |                     |
+
 
 ## Command line for linux  
 
@@ -146,16 +156,6 @@ OR
 To run individual steps, run megadetector use `snakemake --cores all megadetector` and
 then to create a summary CSV run `snakemake --cores all json_to_csv`. The
 final results will be summarised in `project.csv`.  
-
-## Outputs   
-
-| file        | desc |  
-|-------------|------|
-| project.csv | Number of MD detections for each image |
-| megadetector-summary.txt | Summary of results for MD detections |
-| megadetector| Images sorted by MD: animal, empty, person, vehicle    |
-|              |                     |
-
 
 ## Step-by-step workflow if not using snakemake  
 1. Find the Docker image ID and start container dog-go-moo mounting the current
