@@ -31,7 +31,7 @@ megadetector/empty/RECONX101/empty-image.jpg
 ```
 
 ## GUI workflow for Windows users  
-**NOTE** Unfortunitly, if you have a GPU available you will have to use the [command line instructions below](##command-line-instructions). A GPU will speed up the inference by about 10x, depending on how good it is. However, if you don't have a GPU or have plenty of time on your hands or the terminal scares you or you want to get started quickly - read on.  
+**NOTE** Unfortunately, if you have a GPU available you will have to use the [command line instructions below](#command-line-instructions). A GPU will speed up the inference by about 10x, depending on how good it is. However, if you don't have a GPU or have plenty of time on your hands or the terminal scares you or you want to get started quickly - read on.  
 
 1. Install [Docker desktop](https://docs.docker.com/desktop/install/windows-install/)  
 2. Start docker desktop and search for `dwheelerau/easily-triggered` in the search bar at the top of the app  
